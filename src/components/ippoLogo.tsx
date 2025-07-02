@@ -63,7 +63,12 @@ export const Logo = () => {
               stroke: ["black", "white"],
               strokeWidth: [0, 6, 3],
             }}
-            transition={{ duration: 3, ease: "easeInOut", type: "keyframes" }}
+            transition={{
+              duration: 3,
+              ease: "easeInOut",
+              type: "keyframes",
+              delay: 0.5 * index,
+            }}
           />
         );
       })}
