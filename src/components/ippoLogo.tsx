@@ -54,15 +54,16 @@ export const Logo = () => {
           <motion.path
             d={path.draw}
             fill={path.fill}
+            strokeDasharray="1000"
             key={index}
             // initial={{ fill: "0" }}
             animate={{
-              fill: ["0", "#000000", `${path.fill}`],
-              stroke: ["none", "white"],
+              strokeDashoffset: [1000, 0],
+              fill: [0, "#FFFFFF", `${path.fill}`],
+              stroke: ["black", "white"],
               strokeWidth: [0, 6, 3],
-              strokeDasharray: [100, 50, 0],
             }}
-            transition={{ duration: 2, type: "keyframes", delay: 1 }}
+            transition={{ duration: 3, ease: "easeInOut", type: "keyframes" }}
           />
         );
       })}
