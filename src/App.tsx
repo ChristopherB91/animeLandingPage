@@ -8,6 +8,7 @@ import kimura from "./assets/Kimura_Tatsuya.jpg";
 import aokiMura from "./assets/Aokimura.jpg";
 import { Bio } from "./components/charBio";
 import { Logo } from "./components/ippoLogo";
+import { useState } from "react";
 
 interface Boxer {
   name: string;
@@ -72,9 +73,24 @@ function App() {
     },
   ];
 
+  const themes = ["light", "dark"];
+  const [theme, setTheme] = useState<string>(themes[0]);
+
   return (
-    <div className="lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll bg-inherit flex flex-col items-center gap-96">
+    <div
+      className={`theme-${theme} ease-in duration-75 lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll flex flex-col items-center gap-96`}
+    >
       <Logo />
+      <p className="text-tertiary bg-secondary border-primary border-double border-2  text-xl">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+        quisquam quibusdam expedita saepe itaque sed dolor ipsa alias debitis,
+        sint blanditiis commodi voluptates deserunt minus cupiditate reiciendis
+        maxime dicta exercitationem?
+      </p>
+
+      <button onClick={() => setTheme(themes[theme === themes[0] ? 1 : 0])}>
+        THEME CHANGER
+      </button>
       {boxers.map((box, i) => {
         return (
           <Bio imgUrl={box.img} name={box.name} key={i}>
