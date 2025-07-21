@@ -66,8 +66,8 @@ export const Logo = () => {
             transition={{
               duration: 3,
               ease: "easeInOut",
-              type: "keyframes",
-              delay: 0.5 * index,
+              type: "tween",
+              delay: 0.25 * index,
             }}
           />
         );
