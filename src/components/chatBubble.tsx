@@ -1,11 +1,17 @@
 import { AnimatePresence, motion } from "motion/react";
 
-export const Quote = ({ vis }: { vis: boolean }) => {
+export const Quote = ({
+  vis,
+  children,
+}: {
+  vis: boolean;
+  children: React.ReactNode;
+}) => {
   return (
     <AnimatePresence>
       {vis && (
         <motion.div
-          className="rounded-full"
+          className="rounded-full p-3"
           initial={{ border: "solid 0px black", opacity: 0 }}
           animate={{
             border: "solid 4px black",
@@ -34,10 +40,7 @@ export const Quote = ({ vis }: { vis: boolean }) => {
             }}
             exit={{ opacity: 0 }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            id, ratione provident porro ex omnis voluptates quos, maiores eaque
-            quia vitae, ad voluptatum doloribus aperiam eveniet repellat
-            laudantium necessitatibus molestiae?
+            {children}
           </motion.p>
         </motion.div>
       )}
