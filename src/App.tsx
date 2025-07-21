@@ -9,6 +9,7 @@ import aokiMura from "./assets/Aokimura.jpg";
 import { Bio } from "./components/charBio";
 import { Logo } from "./components/ippoLogo";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface Boxer {
   name: string;
@@ -74,34 +75,75 @@ function App() {
   ];
 
   const themes = ["light", "dark"];
-  const [theme, setTheme] = useState<string>(themes[0]);
+  const [theme, setTheme] = useState<string>(themes[1]);
+  const [visible, setVisible] = useState<boolean>(false);
 
   return (
     <div
-      className={`theme-${theme} ease-in duration-75 lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll flex flex-col items-center gap-96`}
+      className={`theme-${theme} bg-primary ease-in duration-75 lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll flex flex-col items-center`}
     >
       <Logo />
-      <p className="text-tertiary bg-secondary border-primary border-double border-2  text-xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-        quisquam quibusdam expedita saepe itaque sed dolor ipsa alias debitis,
-        sint blanditiis commodi voluptates deserunt minus cupiditate reiciendis
-        maxime dicta exercitationem?
+      <p className="text-secondary bg-primary border-tertiary border-double border-2 text-3xl w-3/4">
+        This is a fanmade landing page for the anime Hajime no Ippo by mangaka
+        George Morikawa. In this anime meet an unpopular high school student who
+        falls in love with boxing after an encounter with a pro boxer. Join him
+        on this journey as he fights to answer the question...
+        <br />
+        <span className="font-bold">What is strength?</span>
       </p>
-
-      <button onClick={() => setTheme(themes[theme === themes[0] ? 1 : 0])}>
+      <button
+        onClick={() => setTheme(theme === themes[0] ? themes[1] : themes[0])}
+        className="text-secondary border-solid border-2 border-tertiary rounded-3xl p-3 text-2xl font-bold"
+      >
         THEME CHANGER
       </button>
-      {boxers.map((box, i) => {
-        return (
-          <Bio imgUrl={box.img} name={box.name} key={i}>
-            Age: {box.age} {box.ageNote ?? ""}
-            <br />
-            WeightClass: {box.weightClass}
-            <br />
-            {box.desc}
-          </Bio>
-        );
-      })}
+      <div className="grid grid-cols-2">
+        <div className="row-start-1 row-end-2 col-start-1 col-end-3"></div>
+        {boxers.map((box, i) => {
+          return (
+            <Bio imgUrl={box.img} key={i} visible={visible}>
+              <motion.div
+                className="font-bold text-4xl underline italic lg:text-6xl overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                {box.name.split("").map((l, i) => {
+                  return (
+                    <motion.span
+                      key={i}
+                      variants={{
+                        hidden: { opacity: 0, y: "-100%" },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 1,
+                        delay: 0.05 * i,
+                      }}
+                      className="inline-block underline"
+                    >
+                      {l}
+                    </motion.span>
+                  );
+                })}
+              </motion.div>
+              Age: {box.age} {box.ageNote ?? ""}
+              <br />
+              WeightClass: {box.weightClass}
+              <br />
+              {box.desc}
+              <br />
+              <button
+                className="border-solid border-2 border-secondary rounded-2xl font-normal text-2xl p-3"
+                onClick={() => setVisible(!visible)}
+              >
+                Quote
+              </button>
+            </Bio>
+          );
+        })}
+      </div>
     </div>
   );
 }
