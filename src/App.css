@@ -19,6 +19,17 @@
   --color-tertiary: red;
 }
 
+.part1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 200px);
+  grid-template-areas: "selected selected";
+}
+
+.placeholder {
+  grid-area: selected;
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;

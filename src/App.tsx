@@ -80,10 +80,10 @@ function App() {
 
   return (
     <div
-      className={`theme-${theme} bg-primary ease-in duration-75 lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll flex flex-col items-center`}
+      className={`theme-${theme} bg-primary ease-in duration-100 lg:overflow-y-hidden lg:hover:overflow-y-scroll overflow-y-scroll flex flex-col items-center`}
     >
       <Logo />
-      <p className="text-secondary bg-primary border-tertiary border-double border-2 text-3xl w-3/4">
+      <p className="text-secondary bg-primary border-tertiary border-double border-2 text-3xl w-3/4 p-2">
         This is a fanmade landing page for the anime Hajime no Ippo by mangaka
         George Morikawa. In this anime meet an unpopular high school student who
         falls in love with boxing after an encounter with a pro boxer. Join him
@@ -97,8 +97,8 @@ function App() {
       >
         THEME CHANGER
       </button>
-      <div className="grid grid-cols-2">
-        <div className="row-start-1 row-end-2 col-start-1 col-end-3"></div>
+      <div className="part1">
+        <div className="placeholder"></div>
         {boxers.map((box, i) => {
           return (
             <Bio imgUrl={box.img} key={i} visible={visible}>
