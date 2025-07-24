@@ -11,7 +11,7 @@ export const Bio = ({
   children: React.ReactNode;
 }) => {
   return (
-    <motion.div className="flex flex-col justify-center items-center h-auto max-w-full min-h-screen py-12">
+    <motion.div className="flex flex-col justify-center items-center h-auto max-w-full">
       <Quote vis={visible}>
         {" "}
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia nisi
@@ -22,7 +22,7 @@ export const Bio = ({
         <motion.img
           src={imgUrl}
           alt="image of the character"
-          className="rounded-full h-3/4 max-w-full"
+          className="rounded-full h-1/4 max-w-full"
           initial={{ y: "50%", opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeIn" }}
