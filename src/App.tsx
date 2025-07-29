@@ -77,6 +77,7 @@ function App() {
   const themes = ["light", "dark"];
   const [theme, setTheme] = useState<string>(themes[1]);
   const [visible, setVisible] = useState<boolean>(false);
+  const [boxer, setBoxer] = useState<number>(0);
 
   return (
     <div
@@ -88,8 +89,7 @@ function App() {
         George Morikawa. In this anime meet an unpopular high school student who
         falls in love with boxing after an encounter with a pro boxer. Join him
         on this journey as he fights to answer the question...
-        <br />
-        <span className="font-bold">What is strength?</span>
+        <span className="font-bold block">What is strength?</span>
       </p>
       <button
         onClick={() => setTheme(theme === themes[0] ? themes[1] : themes[0])}
@@ -97,50 +97,57 @@ function App() {
       >
         THEME CHANGER
       </button>
-      <div className="part1">
-        <div className="placeholder"></div>
+      <div className="min-h-screen part1">
+        <Bio imgUrl={boxers[boxer].img} visible={visible}>
+          <motion.div
+            className="font-bold text-4xl underline italic lg:text-6xl overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+          >
+            {boxers[boxer].name.split("").map((l, i) => {
+              return (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: "-100%" },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{
+                    ease: "easeIn",
+                    duration: 1,
+                    delay: 0.05 * i,
+                  }}
+                  className="inline-block underline"
+                >
+                  {l}
+                </motion.span>
+              );
+            })}
+          </motion.div>
+          Age: {boxers[boxer].age} {boxers[boxer].ageNote ?? ""}
+          <br />
+          WeightClass: {boxers[boxer].weightClass}
+          <br />
+          {boxers[boxer].desc}
+          <br />
+          <button
+            className="border-solid border-2 border-secondary rounded-2xl font-normal text-2xl p-3"
+            onClick={() => setVisible(!visible)}
+          >
+            Quote
+          </button>
+        </Bio>
         {boxers.map((box, i) => {
           return (
-            <Bio imgUrl={box.img} key={i} visible={visible}>
-              <motion.div
-                className="font-bold text-4xl underline italic lg:text-6xl overflow-hidden"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {box.name.split("").map((l, i) => {
-                  return (
-                    <motion.span
-                      key={i}
-                      variants={{
-                        hidden: { opacity: 0, y: "-100%" },
-                        visible: { opacity: 1, y: 0 },
-                      }}
-                      transition={{
-                        ease: "easeIn",
-                        duration: 1,
-                        delay: 0.05 * i,
-                      }}
-                      className="inline-block underline"
-                    >
-                      {l}
-                    </motion.span>
-                  );
-                })}
-              </motion.div>
-              Age: {box.age} {box.ageNote ?? ""}
-              <br />
-              WeightClass: {box.weightClass}
-              <br />
-              {box.desc}
-              <br />
-              <button
-                className="border-solid border-2 border-secondary rounded-2xl font-normal text-2xl p-3"
-                onClick={() => setVisible(!visible)}
-              >
-                Quote
-              </button>
-            </Bio>
+            <input
+              type="image"
+              key={i}
+              src={box.img}
+              alt="image of boxer you want to select"
+              className="h-3/4 max-w-full self-center place-self-center"
+              style={{ gridArea: `boxer${i}` }}
+              onClick={() => setBoxer(i)}
+            />
           );
         })}
       </div>
