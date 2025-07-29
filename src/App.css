@@ -21,13 +21,14 @@
 
 .part1 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(5, 200px);
-  grid-template-areas: "selected selected";
-}
-
-.placeholder {
-  grid-area: selected;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 350px repeat(3, 200px);
+  grid-template-areas:
+    "selected selected selected"
+    "boxer0 . boxer1"
+    "boxer4 boxer6 boxer5"
+    "boxer2 . boxer3";
+  width: 75%;
 }
 
 #root {
