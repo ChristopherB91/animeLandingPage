@@ -11,15 +11,15 @@ export const Quote = ({
     <AnimatePresence>
       {vis && (
         <motion.div
-          className="rounded-full p-3"
-          initial={{ border: "solid 0px black", opacity: 0 }}
+          className="rounded-full p-3 text-secondary border-4 border-solid border-tertiary"
+          initial={{ border: "solid 0px tertiary", opacity: 0 }}
           animate={{
-            border: "solid 4px black",
+            border: "solid 4px inherit",
             opacity: 1,
             y: [-25, 0],
           }}
           exit={{
-            border: "solid 0px black",
+            border: "solid 0px inherit",
             opacity: 0,
             y: -25,
             transition: {
